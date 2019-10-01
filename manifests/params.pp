@@ -41,6 +41,10 @@ class selinux::params {
         }
         default: {
           case $os_maj_release {
+            '8': {
+              $sx_fs_mount = '/sys/fs/selinux'
+              $package_name = 'policycoreutils-python-utils'
+            }
             '7': {
               $sx_fs_mount = '/sys/fs/selinux'
               $package_name = 'policycoreutils-python'
@@ -61,7 +65,7 @@ class selinux::params {
               }
             }
             default: {
-              fail("${::operatingsystem}-${::os_maj_release} is not supported")
+              fail("${::operatingsystem}-${os_maj_release} is not supported")
             }
           }
         }
